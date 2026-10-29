@@ -1,0 +1,17 @@
+{
+  "description": "현황분석 게이트 — data/raw 원본 수정 차단, 검토 4차 전 제출 차단",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/gate.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

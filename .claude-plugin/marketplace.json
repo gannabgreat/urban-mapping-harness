@@ -7,7 +7,7 @@
       "name": "urban-mapping-harness",
       "source": "./",
       "description": "현황분석 하네스 — 에이전트 7종, 커맨드 4종, 오케스트레이션 스킬, 데이터 출처 레퍼런스, 프로젝트 스캐폴드",
-      "version": "0.1.0"
+      "version": "0.2.0"
     }
   ]
 }

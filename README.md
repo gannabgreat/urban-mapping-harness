@@ -18,6 +18,8 @@
 - **만든 쪽 ≠ 검토하는 쪽** — 검토는 4차까지, 차수마다 다른 검수자. 지적은 그대로 받지 않고 데이터로 다시 계산해서 맞는 것만 고친다.
 - **자동 판정은 표본 확인 뒤에** — 색 판정·사진 판독 규칙은 표본을 사람/본체가 직접 보고 맞는지 확인한 뒤에 전체에 돌린다.
 - **출처가 시트에 남는다** — 모든 레이어에 출처·기준일을 적는다(`SOURCES.md`).
+- **결론은 한 문서로** — 시트 결론은 `CONCLUSION.md` 하나로 모이고, 결론마다 근거 시트·데이터 파일을 단다. 사람 판단이 필요한 건 🔲 미결정.
+- **규칙 일부는 훅이 막는다** — 원본 수정과 검토 4차 전 제출은 문장이 아니라 훅으로 차단한다.
 - **사람 몫과 자동 몫을 나눈다** — 답사·촬영·판단·롤백은 사람, 수집·정합·판독·작도·계산·검토는 AI.
 
 ## 구성
@@ -28,7 +30,8 @@
 | `skills/urban-mapping-harness/` | 오케스트레이션(원칙·단계·검토 게이트) |
 | `skills/urban-mapping-reference/` | 한국 공공데이터 출처, 좌표 정합, 시트 목록, 사진 판독, 검토 체크리스트, 파이썬 도구 |
 | `commands/` | `/um-init` `/um-sheet` `/um-review` `/um-field` |
-| `templates/project-scaffold/` | 인스턴스 스켈레톤 |
+| `hooks/` | PreToolUse 게이트 — `data/raw` 원본 수정 차단, 검토 4차 전 「제출」 차단 |
+| `templates/project-scaffold/` | 인스턴스 스켈레톤(`CONCLUSION.md`, `scripts/run.sh`·`sheet_template.py` 포함) |
 
 ## 사용 흐름
 1. `/um-init <slug>` — 인스턴스 생성 + 대상지·담당 가로·제출 규격·교수 제공 자료 인터뷰
@@ -36,6 +39,10 @@
 3. `/um-sheet <번호>` — 시트 1장: 수집 → 정합 → 판독 → 작도 → 자가검토
 4. `/um-review <차수>` — 적대적 검토 1~4차
 5. `/um-field` — 현장에서만 확인되는 항목 목록 뽑기(줄자 실측·개방 여부 등)
+
+## 변경 이력
+- 0.2.0 (2026-10-29) — 템플릿 경로를 `${CLAUDE_PLUGIN_ROOT}` 로 고정(디스크를 뒤져 다른 사본을 집던 문제), `CONCLUSION.md` 귀결 문서·🔲 미결정·심사자 페르소나 추가, 검수 에이전트 읽기 전용, `hooks/gate.py` 게이트, 시트 견본 스크립트(`sheet_template.py`, 축척 자동 검사)·`run.sh`. urban-design-harness 분석에서 가져온 것 포함.
+- 0.1.0 — 첫 공개
 
 ## 참고
 구조(플러그인·에이전트·커맨드·스캐폴드 분리)는 [FrownyFrown/urban-design-harness](https://github.com/FrownyFrown/urban-design-harness)(MIT)를 참고했습니다. 그쪽은 마스터플랜·판넬 설계 중심, 이쪽은 현황분석·데이터 중심입니다.
